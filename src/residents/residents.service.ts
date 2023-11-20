@@ -1,5 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { HttpStatus, Injectable } from '@nestjs/common';
+import { ResidentsCityDto } from './dtos/residents-city.dto';
 import ResidentsRepository from './residents.repository';
 
 @Injectable()
@@ -9,7 +10,7 @@ export class ResidentsService {
     private readonly residentsRepository: ResidentsRepository,
   ) {}
 
-  async getCitiesData(city?: string) {
+  async getCitiesData(city?: string): Promise<ResidentsCityDto> {
     const startData = new Date().getTime();
     const data = await this.residentsRepository.get(city);
     const finishData = new Date().getTime();
@@ -28,6 +29,6 @@ export class ResidentsService {
       },
     });
 
-    return data;
+    return data as ResidentsCityDto;
   }
 }

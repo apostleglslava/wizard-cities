@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import DatabaseService from '../database/database.service';
+import { ResidentsCityDto } from './dtos/residents-city.dto';
 
 @Injectable()
 class ResidentsRepository {
   constructor(private readonly databaseService: DatabaseService) {}
 
-  async get(city?: string) {
+  async get(city?: string): Promise<ResidentsCityDto> {
     let queryString = `
         SELECT 
             COUNT(*)::int AS city_resident_name_count,
@@ -72,7 +73,7 @@ class ResidentsRepository {
     return {
       cities_population,
       city_members,
-    };
+    } as ResidentsCityDto;
   }
 }
 

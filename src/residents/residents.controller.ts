@@ -23,7 +23,9 @@ export default class ResidentsController {
     description: 'Returns cities residents data',
     type: ResidentsCityDto,
   })
-  getPosts(@Query() { city }: GetResidentsByCityNameQuery) {
+  getPosts(
+    @Query() { city }: GetResidentsByCityNameQuery,
+  ): Promise<ResidentsCityDto> {
     return this.residentsService.getCitiesData(city);
   }
 }
